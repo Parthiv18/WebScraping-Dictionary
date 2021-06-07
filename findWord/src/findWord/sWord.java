@@ -21,23 +21,22 @@ public class sWord {
 	public static void gWords (String word)
 		{
 		    try
-		    { //System.out.print(word);
-		        Document doc = Jsoup.connect ("https://www.google.com/search?q=" + word + "+meaning").timeout (6000).get ();
-		        Elements temp = doc.select ("div.L1jWkf.h3TRxf"); //for dictionay - default-content - lister-item-content - css-1avshm7 e16867sm0 - css-1ghs5zt e1q3nk1v2   
+		    { 
+		    	//System.out.print(word);
+		        Document doc = Jsoup.connect ("https://www.merriam-webster.com/dictionary/"+word).timeout (6000).get ();
+		        Elements temp = doc.select ("div.sense.has-sn"); //for dictionay - default-content - lister-item-content - css-1avshm7 e16867sm0 - css-1ghs5zt e1q3nk1v2   
 		        
 		        int i = 0;
-		        for (Element element:
-		        temp)
+		        for (Element element:temp)
 		        {
 		            i++;
-		            System.out.print (i + " " + element.select ("span").first ().text () + "\n"); //first() //if (i==3) { //break;   //}
+		            System.out.print (i+" "+element.select("span.dtText").first().text()+ "\n"); //first() //if (i==3) { //break;   //}
 		        }
 		    }
-
-
 		    catch (IOException e)
 		    {
-		        e.printStackTrace ();
+		        e.printStackTrace ();		      
+		        System.out.print("Word not found, checking for spelling mistakes");		     
 		    }
-
+		}
 }
